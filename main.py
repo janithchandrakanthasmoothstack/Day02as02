@@ -11,7 +11,7 @@ def main():
 
 def calculateMonthlyFee():
 
-    return
+    return 0
 
 def calculateFeeLoop(P=800000,R=6,M=10000):
     #init
