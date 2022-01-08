@@ -6,9 +6,12 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import platform
 def main():
-  totalMonthCount = calculateFeeLoop()
-  print(f'Total Month Count : {totalMonthCount}')
+  totalMonthCount = calculateMonthlyFee()
+  print(f'Monthly Fee : {totalMonthCount}')
 
+def calculateMonthlyFee():
+
+    return
 
 def calculateFeeLoop(P=800000,R=6,M=10000):
     #init
@@ -19,7 +22,6 @@ def calculateFeeLoop(P=800000,R=6,M=10000):
     print('Month        P      P  *  (R/12)%      -M          new P')
 
     while newP>0:
-
      monthCount = monthCount +1
      interestval = (newP* (R/12))/100
      xp = newP
@@ -41,7 +43,6 @@ def calculateFee(P=700000,R=6,M=10000,mc=1):
       if newP>M:
         print(f'Paying {mc}         {P}       ${interestval}        {M}       {newP} ')
         calculateFee(newP,R,M,(mo))
-
       else:
           print(f'Last Payment {mc}         {P}       ${interestval}        {M}       {newP} ')
     return mo
