@@ -6,9 +6,9 @@ import platform
 
 def main():
   rental = monthlyCal()
-  print('!!!!!!!!!!!!!!Final Answer !!!!!!!!!!!!!')
+  print('!!!!!!!!!!!!!!Final Answer !!!!!!!!!!!')
   print(f'Monthly Rental >>> {rental:.0f}')
-  print('=======================================')
+  print('=====================================')
 
 def monthlyCal(P=800000,R=6,N=103):
       #formula >   M = P [(1+r)^n]/[(1+r)^n - 1]]
