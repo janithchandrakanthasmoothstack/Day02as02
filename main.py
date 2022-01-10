@@ -19,7 +19,7 @@ def monthlyCal(P=800000,R=6,N=103):
       K = pow((1+r),N)
       print(f'k : {K}')
       M = P *((r*K)/(K-1))
-      return M
+      return M  #month count
 
 def calculateFeeLoop(P=800000,R=6,M=10000):
     #init
