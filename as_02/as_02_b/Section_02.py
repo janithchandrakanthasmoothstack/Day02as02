@@ -1,9 +1,10 @@
+import sys
 
 def main():
-   print(factorialNumber(4))
-
+    #input number
+   text = int(input("Input Number : "))
+   print(factorialNumber(text))
 def factorialNumber(input):
-
     if input == 1:
         return 1
     elif input < 1:
@@ -11,5 +12,4 @@ def factorialNumber(input):
     else:
         return (input * factorialNumber(input-1))
 
-
-if __name__ == '__main__': main()
+main()

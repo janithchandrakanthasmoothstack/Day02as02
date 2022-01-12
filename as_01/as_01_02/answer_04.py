@@ -21,4 +21,4 @@ def monthlyCal(P=800000,R=6,N=103):
       M = P *((r*K)/(K-1))
       return M  #month count
 
-if __name__ == '__main__': main()
+main()
