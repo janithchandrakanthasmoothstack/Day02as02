@@ -1,18 +1,18 @@
 import sys
 import datetime
-from openpyxl import load_workbook
-import logging
-from ex_01.myUtils import validator,excelReader
+from ex_01.myUtils import fileManager
+from ex_01.myUtils import myExcelReader
 
 
 def main():
-    fileName = input("File Name Please: ")
-    # fileName = 'expedia_report_monthly_january_20x8.xlsx'
-    validateResponse = validator.fileNameValidator(fileName)
+    fileName = fileManager.fileSearch();
+    print(fileName)
+    validateResponse = fileManager.validateFileNames(fileName)
+    print(validateResponse)
     reportMonth = validateResponse[0];reportYear = validateResponse[1];
     if isinstance(validateResponse,list):
         #read Excel File
-        t = excelReader(fileName,'Summary Rolling MoM','A2','F13')
+        t =  myExcelReader.readExcel("expedia_report_monthly_january_2018.xlsx",'Summary Rolling MoM','A2','F13')
 
         for date,calls_offered,abondon,fcr,dsat,csat in filter(lambda c : (c[0].value>=datetime.datetime(reportYear,reportMonth,1)) & (c[0].value<=datetime.datetime(reportYear,reportMonth,31)), t):
             print(f'Calls Offered: {calls_offered.value}')

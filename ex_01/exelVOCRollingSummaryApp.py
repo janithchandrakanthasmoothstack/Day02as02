@@ -1,25 +1,45 @@
 import sys
+
 import datetime
 from openpyxl import load_workbook
 import logging
-from ex_01.myUtils import validator,excelReader
-
+from ex_01.myUtils import fileManager,myExcelReader
+from ex_01.myUtils.myExcelReader import readExcel, getCustomResult
 
 def main():
-    fileName = input("File Name Please: ")
-    # fileName = 'expedia_report_monthly_january_20x8.xlsx'
-    validateResponse = validator.fileNameValidator(fileName)
+
+    fileName = fileManager.fileSearch();
+    validateResponse = fileManager.validateFileNames(fileName)
     reportMonth = validateResponse[0];reportYear = validateResponse[1];
     if isinstance(validateResponse,list):
         #read Excel File
-        t = excelReader(fileName,'VOC Rolling MoM','A2','F13')
+        t = myExcelReader.readExcel(fileName, 'VOC Rolling MoM', 'B1', 'J1')
+       #for rowOfCellObjects in t:
+        for cellObj in filter(lambda d:(d.value>=datetime.datetime(reportYear,reportMonth,1)) &
+                                       (d.value<=datetime.datetime(reportYear,reportMonth,31)),t[0]):
+            # print(cellObj.coordinate[0])
+            r = readExcel(fileName, 'VOC Rolling MoM', f'{cellObj.coordinate[0]}5', f'{cellObj.coordinate[0]}10')
+            p = getCustomResult(fileName,'VOC Rolling MoM','B1','J1')
 
-        for date,calls_offered,abondon,fcr,dsat,csat in filter(lambda c : (c[0].value>=datetime.datetime(reportYear,reportMonth,1)) & (c[0].value<=datetime.datetime(reportYear,reportMonth,31)), t):
-            print(f'Calls Offered: {calls_offered.value}')
-            print(f'Abandon after 30s :  {abondon.value*100:.2f}:%')
-            print(f'FCR: {fcr.value*100:.2f}%')
-            print(f'DSAT: {dsat.value*100:.2f}%')
-            print(f'CSAT: {csat.value*100:.2f}%')
+            summary = []
+            for title,value in filter(lambda x: x[0]!=None,p):
+                print(f"{title} > {value}")
+                if title.startswith('Promoters'):
+                    summary.append(('Promoters', value,(lambda value:"good Promoters" if (value>200) else "bad" )(value)))
+                if title.startswith('Passives'):
+                    summary.append(('Passives', value,(lambda value:"good Passives" if (value>100) else "bad" )(value)))
+                if title.startswith('Dectractors'):
+                    summary.append(('Dectractors', value,(lambda value:"good Decrators" if (value>100) else "bad" )(value)))
+            print("In Net Promoter Score : ",end=" ")
+            print(f'{summary[0][0]} {summary[0][2]} ({summary[0][1]})')
+            print(f'                         {summary[1][0]} {summary[1][2]} ({summary[1][1]})')
+            print(f'                         {summary[2][0]} {summary[2][2]} ({summary[2][1]})')
+            # for x,y,z in summary:
+            #     print(f'{x}',end=" ")
+            #     print(f'{y}',end=" ")
+            #     print(z)
+
+
+
     else:print(validateResponse)
-
 if __name__ == '__main__':main()
