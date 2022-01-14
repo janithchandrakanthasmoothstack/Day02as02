@@ -12,7 +12,7 @@ def main():
     reportMonth = validateResponse[0];reportYear = validateResponse[1];
     if isinstance(validateResponse,list):
         #read Excel File
-        t = excelReader(fileName,'Summary Rolling MoM','A2','F13')
+        t = excelReader(fileName,'VOC Rolling MoM','A2','F13')
 
         for date,calls_offered,abondon,fcr,dsat,csat in filter(lambda c : (c[0].value>=datetime.datetime(reportYear,reportMonth,1)) & (c[0].value<=datetime.datetime(reportYear,reportMonth,31)), t):
             print(f'Calls Offered: {calls_offered.value}')
