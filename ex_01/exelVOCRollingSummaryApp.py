@@ -16,11 +16,12 @@ def main():
     reportMonth = validateResponse[0];reportYear = validateResponse[1];
     if isinstance(validateResponse,list):
         #read Excel File
-        t = myExcelReader.readExcel(fileName, 'VOC Rolling MoM', 'B1', 'J1')
+        t = myExcelReader.readExcel(fileName, 'VOC Rolling MoM', 'B1', 'x1')
+
        #for rowOfCellObjects in t:
         for cellObj in filter(lambda d:(d.value>=datetime.datetime(reportYear,reportMonth,1)) &
                                        (d.value<=datetime.datetime(reportYear,reportMonth,31)),t[0]):
-            # print(cellObj.coordinate[0])
+
             r = readExcel(fileName, 'VOC Rolling MoM', f'{cellObj.coordinate[0]}5', f'{cellObj.coordinate[0]}10')
             p = getCustomResult(fileName,'VOC Rolling MoM','B1','J1')
 
