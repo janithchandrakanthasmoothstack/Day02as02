@@ -6,6 +6,9 @@ import logging
 from ex_01.myUtils import fileManager,myExcelReader
 from ex_01.myUtils.myExcelReader import readExcel, getCustomResult
 
+import logging
+logging.basicConfig(encoding='utf-8', level=logging.INFO)
+
 def main():
 
     fileName = fileManager.fileSearch();
@@ -30,14 +33,16 @@ def main():
                     summary.append(('Passives', value,(lambda value:"good Passives" if (value>100) else "bad" )(value)))
                 if title.startswith('Dectractors'):
                     summary.append(('Dectractors', value,(lambda value:"good Decrators" if (value>100) else "bad" )(value)))
-            print("In Net Promoter Score : ",end=" ")
-            print(f'{summary[0][0]} {summary[0][2]} ({summary[0][1]})')
-            print(f'                         {summary[1][0]} {summary[1][2]} ({summary[1][1]})')
-            print(f'                         {summary[2][0]} {summary[2][2]} ({summary[2][1]})')
-            # for x,y,z in summary:
-            #     print(f'{x}',end=" ")
-            #     print(f'{y}',end=" ")
-            #     print(z)
+
+            # print("In Net Promoter Score : ",end=" ")
+            # print(f'{summary[0][0]} {summary[0][2]} ({summary[0][1]})')
+            # print(f'                         {summary[1][0]} {summary[1][2]} ({summary[1][1]})')
+            # print(f'                         {summary[2][0]} {summary[2][2]} ({summary[2][1]})')
+
+            logging.info("In Net Promoter Score : ")
+            logging.info(f'{summary[0][0]} {summary[0][2]} ({summary[0][1]})')
+            logging.info(f'{summary[1][0]} {summary[1][2]} ({summary[1][1]})')
+            logging.info(f'{summary[2][0]} {summary[2][2]} ({summary[2][1]})')
 
 
 
