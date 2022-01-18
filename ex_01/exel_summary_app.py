@@ -3,7 +3,7 @@ import datetime
 from ex_01.myUtils import fileManager
 from ex_01.myUtils import myExcelReader
 import logging
-logging.basicConfig(encoding='utf-8', level=logging.INFO)
+logging.basicConfig(encoding='utf-8', level=logging.INFO,filename='excel_summary.log')
 
 def main():
     fileName = fileManager.fileSearch();
@@ -22,11 +22,11 @@ def main():
             logging.info(f'DSAT: {dsat.value*100:.2f}%')
             logging.info(f'CSAT: {csat.value*100:.2f}%')
 
-            # print(f'Calls Offered: {calls_offered.value}')
-            # print(f'Abandon after 30s :  {abondon.value*100:.2f}:%')
-            # print(f'FCR: {fcr.value*100:.2f}%')
-            # print(f'DSAT: {dsat.value*100:.2f}%')
-            # print(f'CSAT: {csat.value*100:.2f}%')
+            print(f'Calls Offered: {calls_offered.value}')
+            print(f'Abandon after 30s :  {abondon.value*100:.2f}:%')
+            print(f'FCR: {fcr.value*100:.2f}%')
+            print(f'DSAT: {dsat.value*100:.2f}%')
+            print(f'CSAT: {csat.value*100:.2f}%')
     else:print(validateResponse)
 
 if __name__ == '__main__':main()
